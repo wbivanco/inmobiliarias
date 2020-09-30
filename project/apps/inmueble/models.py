@@ -31,7 +31,7 @@ class InmuebleBase(ModeloBase):
 
     nombre = models.CharField(max_length=80)
     medidas = models.CharField(max_length=30, blank=True)
-    moneda = models.CharField(max_length=1, choices=MONEDAS, default=PESO)
+    moneda = models.CharField(max_length=5, choices=MONEDAS, default=PESO)
     precio = models.DecimalField(max_digits=11, decimal_places=2)
     descripcion = models.TextField(blank=True)
     en_venta = models.BooleanField(default=False)
@@ -46,3 +46,14 @@ class InmuebleBase(ModeloBase):
         on_delete=models.SET_NULL,
         blank=True, null=True
     )
+
+
+class Casa(InmuebleBase):
+    class Meta:
+        verbose_name = 'Casa'
+        verbose_name_plural = 'Casas'
+
+    metros_cubiertos = models.IntegerField(verbose_name='Metros Cubiertos')
+    cantidad_habitaciones = models.IntegerField(verbose_name='Cantidad de habitaciones')
+    cantidad_banios = models.IntegerField(verbose_name='Cantidad de Baños')
+    cantidad_suite = models.IntegerField(verbose_name='Cantidad de Suite')
