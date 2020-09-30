@@ -28,7 +28,7 @@ class Telefono(models.Model):
         return "{} ({})".format(self.content_object, self.get_tipo_display())
 
 
-class RedeSocial(models.Model):
+class RedSocial(models.Model):
     class Meta:
         verbose_name = 'Red Social'
         verbose_name_plural = 'Redes Sociales'
