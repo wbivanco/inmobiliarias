@@ -11,6 +11,9 @@ class Servicio(ModeloBase):
 
     nombre = models.CharField(max_length=50)
 
+    def __str__(self):
+        return self.nombre
+
 
 class InmuebleBase(ModeloBase):
     class Meta:
@@ -38,13 +41,14 @@ class InmuebleBase(ModeloBase):
     en_alquiler = models.BooleanField(default=False)
 
     # Relaciones
-    servicios = models.ManyToManyField(Servicio)
+    servicios = models.ManyToManyField(Servicio, blank=True, null=True)
 
     # Auditoria
     usuario = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.SET_NULL,
-        blank=True, null=True
+        blank=True, null=True,
+        editable=False
     )
 
 
