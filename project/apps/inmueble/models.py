@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.db import models
 
-from project.apps.core.models import ModeloBase
+from core.models import ModeloBase
 
 
 class Servicio(ModeloBase):
@@ -41,14 +41,12 @@ class InmuebleBase(ModeloBase):
     en_alquiler = models.BooleanField(default=False)
 
     # Relaciones
-    servicios = models.ManyToManyField(Servicio, blank=True, null=True)
+    servicios = models.ManyToManyField(Servicio, blank=True)
 
-    # Auditoria
-    usuario = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
+    inmobiliaria = models.ForeignKey(
+        'inmobiliaria.Inmobiliaria',
         on_delete=models.SET_NULL,
-        blank=True, null=True,
-        editable=False
+        blank=True, null=True
     )
 
 
@@ -61,3 +59,5 @@ class Casa(InmuebleBase):
     cantidad_habitaciones = models.IntegerField(verbose_name='Cantidad de habitaciones')
     cantidad_banios = models.IntegerField(verbose_name='Cantidad de Baños')
     cantidad_suite = models.IntegerField(verbose_name='Cantidad de Suite')
+
+    # TODO: Añadir los campos faltantes.

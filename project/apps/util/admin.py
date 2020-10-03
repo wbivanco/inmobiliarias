@@ -1,3 +1,14 @@
 from django.contrib import admin
+from django.contrib.contenttypes.admin import GenericTabularInline
 
-# Register your models here.
+from util.models import Telefono, RedSocial
+
+
+class TelefonoInline(GenericTabularInline):
+    model = Telefono
+    extra = 1
+    classes = ['collapse']
+
+
+class RedSocialInline(GenericTabularInline):
+    model = RedSocial
