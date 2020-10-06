@@ -40,4 +40,5 @@ class CasaAdmin(admin.ModelAdmin):
     obtener_servicios.short_description = 'Servicios'
 
     def get_queryset(self, request):
-        return super().get_queryset(request)
+        queryset = super().get_queryset(request)
+        return queryset

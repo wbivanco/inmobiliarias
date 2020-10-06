@@ -18,9 +18,12 @@ from django.contrib import admin
 from django.urls import path, include
 from django.views.generic import RedirectView
 
+from project.router import router
+
 urlpatterns = [
     path('', RedirectView.as_view(url='/admin')),
     path('admin/', admin.site.urls),
+    path('api/v1/', include(router.urls)),
 ]
 
 

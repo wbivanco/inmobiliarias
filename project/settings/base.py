@@ -54,6 +54,7 @@ DJANGO_APPS = [
 ]
 
 THIRD_APPS = [
+    'rest_framework',
 ]
 
 PROJECT_APPS = [
