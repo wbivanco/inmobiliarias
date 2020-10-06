@@ -49,6 +49,9 @@ class InmuebleBase(ModeloBase):
         blank=True, null=True
     )
 
+    def __str__(self):
+        return self.nombre
+
 
 class Casa(InmuebleBase):
     class Meta:

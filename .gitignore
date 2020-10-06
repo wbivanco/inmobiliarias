@@ -1,6 +1,16 @@
+# IDE de desarrollo.
 .idea/
+
+# Configuraciones del proyecto
 .env
 
+# Cache de Python
 __pycache__/
 
+# Media / Statics
 project/statics/
+project/media/
+
+# pytest.
+test_media/
+.pytest_cache/

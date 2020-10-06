@@ -53,13 +53,14 @@ DJANGO_APPS = [
     'django.contrib.staticfiles',
 ]
 
-THIRD_APPS = []
+THIRD_APPS = [
+]
 
 PROJECT_APPS = [
     'core',
     'util',
     'inmueble',
-    'inmobiliaria'
+    'inmobiliaria',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_APPS + PROJECT_APPS
@@ -140,3 +141,11 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 STATIC_ROOT = PROJECT_DIR.path('statics')
+
+
+ACTIVAR_HERRAMIENTAS_DESARROLLO = env.bool('ACTIVAR_HERRAMIENTAS_DESARROLLO', default=False)
+
+if ACTIVAR_HERRAMIENTAS_DESARROLLO:
+    INSTALLED_APPS += ['debug_toolbar', 'django_extensions']
+    MIDDLEWARE = ['debug_toolbar.middleware.DebugToolbarMiddleware'] + MIDDLEWARE
+    INTERNAL_IPS = ['127.0.0.1']
