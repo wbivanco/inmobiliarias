@@ -62,6 +62,7 @@ PROJECT_APPS = [
     'util',
     'inmueble',
     'inmobiliaria',
+    'usuario',
 ]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_APPS + PROJECT_APPS
