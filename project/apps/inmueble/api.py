@@ -5,6 +5,9 @@ from inmueble.serializers import CasaSerializer, ServicioSerializer
 
 
 class ServicioViewSet(ModelViewSet):
+    """
+    Una ViewSet se documenta con las triples comillas, sean dobles (") o simples (')
+    """
     queryset = Servicio.objects.activos()
     serializer_class = ServicioSerializer
 

@@ -1,4 +1,4 @@
-from rest_framework import serializers
+from rest_framework_json_api import serializers
 
 from inmobiliaria.serializers import InmobiliariaSerializer
 from inmueble.models import Casa, Servicio
@@ -7,7 +7,7 @@ from inmueble.models import Casa, Servicio
 class ServicioSerializer(serializers.ModelSerializer):
     class Meta:
         model = Servicio
-        exclude = ('activo', )
+        fields = ('nombre', 'fecha_creacion')
 
     def validate_nombre(self, value):
         if value.startswith('cancha'):
@@ -17,9 +17,11 @@ class ServicioSerializer(serializers.ModelSerializer):
 
 
 class CasaSerializer(serializers.ModelSerializer):
-    servicios = serializers.StringRelatedField(many=True)
-    inmobiliaria = InmobiliariaSerializer()
-
     class Meta:
         model = Casa
         fields = serializers.ALL_FIELDS
+
+    included_serializers = {
+        'inmobiliaria': InmobiliariaSerializer,
+        'servicios': ServicioSerializer,
+    }
