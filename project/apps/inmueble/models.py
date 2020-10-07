@@ -2,6 +2,7 @@ from django.conf import settings
 from django.db import models
 
 from core.models import ModeloBase
+from inmueble.querysets import ServicioQuerySet
 
 
 class Servicio(ModeloBase):
@@ -10,6 +11,8 @@ class Servicio(ModeloBase):
         verbose_name_plural = 'Servicios'
 
     nombre = models.CharField(max_length=50)
+
+    objects = ServicioQuerySet.as_manager()
 
     def __str__(self):
         return self.nombre

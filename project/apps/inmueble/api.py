@@ -5,7 +5,7 @@ from inmueble.serializers import CasaSerializer, ServicioSerializer
 
 
 class ServicioViewSet(ModelViewSet):
-    queryset = Servicio.objects.all()
+    queryset = Servicio.objects.activos()
     serializer_class = ServicioSerializer
 
 

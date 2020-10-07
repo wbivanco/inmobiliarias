@@ -17,3 +17,11 @@ class ModeloBase(models.Model):
         blank=True, null=True,
         editable=False
     )
+
+    def activar(self):
+        self.activo = True
+        self.save(update_fields=('activo',))
+
+    def desactivar(self):
+        self.activo = False
+        self.save(update_fields=('activo', ))

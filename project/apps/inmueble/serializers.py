@@ -7,7 +7,7 @@ from inmueble.models import Casa, Servicio
 class ServicioSerializer(serializers.ModelSerializer):
     class Meta:
         model = Servicio
-        fields = serializers.ALL_FIELDS
+        exclude = ('activo', )
 
     def validate_nombre(self, value):
         if value.startswith('cancha'):
