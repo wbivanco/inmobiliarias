@@ -1,7 +1,7 @@
 from django.db import models
 
 from core.models import ModeloBase
-from inmueble.querysets import ServicioQuerySet
+from inmueble.querysets import ServicioQuerySet, InmuebleBaseQuerySet
 
 
 class Servicio(ModeloBase):
@@ -50,6 +50,8 @@ class InmuebleBase(ModeloBase):
         on_delete=models.SET_NULL,
         blank=True, null=True
     )
+
+    objects = InmuebleBaseQuerySet.as_manager()
 
     def __str__(self):
         return self.nombre
