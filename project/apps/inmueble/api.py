@@ -4,7 +4,7 @@ from rest_framework import mixins
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ReadOnlyModelViewSet, GenericViewSet
 
-from inmueble.filters import ServicioFilter
+from inmueble.filters import ServicioFilter, CasaFilter
 from inmueble.models import Casa, Servicio
 from inmueble.serializers import CasaSerializer, ServicioSerializer
 
@@ -35,3 +35,5 @@ class CasaViewSet(ReadOnlyModelViewSet):
     ).order_by('nombre')
 
     serializer_class = CasaSerializer
+    filter_backends = (DjangoFilterBackend,)
+    filter_class = CasaFilter
