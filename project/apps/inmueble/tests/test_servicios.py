@@ -99,3 +99,20 @@ def test_creacion_servicio_falla_por_nombre_de_servicio_no_permitidos(crear_serv
     assert errors[0]['detail'] == 'El nombre indicado comienza con un valor no permitido'
 
 
+@pytest.mark.django_db
+def test_listado_servicio_filtro_por_nombre(crear_servicios):
+    usuario_autenticado = crear_usuario('debianitram')
+
+    response = get('/api/v1/servicio/?buscar=as', user_logged=usuario_autenticado)
+    assert response.status_code == 200
+    json_data = response.json()
+    data = json_data['data']
+    meta = json_data['meta']
+
+    assert meta['pagination']['count'] == 2
+
+    assert data[0]['type'] == 'Servicio'
+    assert data[0]['attributes']['nombre'] == 'gas'
+
+    assert data[1]['type'] == 'Servicio'
+    assert data[1]['attributes']['nombre'] == 'asador'

@@ -4,7 +4,7 @@ from rest_framework import mixins
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ReadOnlyModelViewSet, GenericViewSet
 
-from inmueble.filters import InmuebleFilter
+from inmueble.filters import ServicioFilter
 from inmueble.models import Casa, Servicio
 from inmueble.serializers import CasaSerializer, ServicioSerializer
 
@@ -17,8 +17,7 @@ class ServicioViewSet(mixins.CreateModelMixin, mixins.RetrieveModelMixin, mixins
     serializer_class = ServicioSerializer
     permission_classes = (IsAuthenticated, )
     filter_backends = (DjangoFilterBackend, )
-    filter_class = InmuebleFilter
-
+    filter_class = ServicioFilter
 
     def perform_create(self, serializer):
         serializer.save(usuario=self.request.user)
