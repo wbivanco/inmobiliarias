@@ -148,11 +148,6 @@ STATIC_ROOT = PROJECT_DIR.path('statics')
 
 ACTIVAR_HERRAMIENTAS_DESARROLLO = env.bool('ACTIVAR_HERRAMIENTAS_DESARROLLO', default=False)
 
-if ACTIVAR_HERRAMIENTAS_DESARROLLO:
-    INSTALLED_APPS += ['debug_toolbar', 'django_extensions']
-    MIDDLEWARE = ['debug_toolbar.middleware.DebugToolbarMiddleware'] + MIDDLEWARE
-    INTERNAL_IPS = ['127.0.0.1']
-
 
 REST_FRAMEWORK = {
     'PAGE_SIZE': 10,
@@ -166,7 +161,12 @@ REST_FRAMEWORK = {
     ),
     'DEFAULT_RENDERER_CLASSES': (
         'rest_framework_json_api.renderers.JSONRenderer',
-        'rest_framework.renderers.BrowsableAPIRenderer'
     ),
     'DEFAULT_METADATA_CLASS': 'rest_framework_json_api.metadata.JSONAPIMetadata',
 }
+
+if ACTIVAR_HERRAMIENTAS_DESARROLLO:
+    INSTALLED_APPS += ['debug_toolbar', 'django_extensions']
+    MIDDLEWARE = ['debug_toolbar.middleware.DebugToolbarMiddleware'] + MIDDLEWARE
+    INTERNAL_IPS = ['127.0.0.1']
+    REST_FRAMEWORK['DEFAULT_RENDERER_CLASSES'] += ('rest_framework.renderers.BrowsableAPIRenderer', )

@@ -8,4 +8,4 @@ class ServicioFilter(filters.FilterSet):
         model = Servicio
         fields = ('buscar', )
 
-    buscar = filters.CharFilter(field_name='nombre', lookup_expr='icontains')
+    buscar = filters.CharFilter(field_name='nombre', lookup_expr='icontains', label='Nombre')
