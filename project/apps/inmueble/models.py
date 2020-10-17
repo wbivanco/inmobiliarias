@@ -9,12 +9,16 @@ class Servicio(ModeloBase):
         verbose_name = 'Servicio'
         verbose_name_plural = 'Servicios'
 
-    nombre = models.CharField(max_length=50)
+    nombre = models.CharField(max_length=50, unique=True)
 
     objects = ServicioQuerySet.as_manager()
 
     def __str__(self):
         return self.nombre
+
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        self.nombre = self.nombre.lower()
+        super().save(force_insert=force_insert, force_update=force_update, using=using, update_fields=update_fields)
 
 
 class InmuebleBase(ModeloBase):

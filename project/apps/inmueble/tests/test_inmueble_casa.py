@@ -2,38 +2,7 @@ import pytest
 
 from core.tests.utils import get
 from inmobiliaria.models import Inmobiliaria
-from inmueble.tests.fixtures import crear_servicios, crear_casas
-from usuario.tests.fixtures import crear_usuario
-
-
-@pytest.mark.django_db
-def test_falla_al_listar_servicios_sin_usuario_autenticado(crear_servicios):
-    endpoint = '/api/v1/servicio/'
-    response = get(endpoint)
-    assert response.status_code == 403
-
-
-@pytest.mark.django_db
-def test_obtener_listado_servicios_activos_ordenados_nombre_descendente(crear_servicios):
-    gas, pileta, asador = crear_servicios
-    pileta.desactivar()
-
-    usuario_autenticado = crear_usuario(username='debianitram')
-
-    endpoint = '/api/v1/servicio/'
-    response = get(endpoint, user_logged=usuario_autenticado)
-    assert response.status_code == 200
-
-    json_data = response.json()
-    data = json_data['data']
-    meta = json_data['meta']
-
-    assert meta['pagination']['count'] == 2
-    assert data[0]['type'] == 'Servicio'
-    assert data[0]['attributes']['nombre'] == 'Gas'
-
-    assert data[1]['type'] == 'Servicio'
-    assert data[1]['attributes']['nombre'] == 'Asador'
+from inmueble.tests.fixtures import crear_casas, crear_servicios
 
 
 @pytest.mark.django_db
