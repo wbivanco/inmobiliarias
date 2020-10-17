@@ -25,7 +25,7 @@ admin.site.register(Servicio, ServicioAdmin)
 
 @admin.register(Casa)
 class CasaAdmin(admin.ModelAdmin):
-    list_display = ['nombre', 'fecha_creacion', 'usuario', 'inmobiliaria', 'obtener_servicios']
+    list_display = ['nombre', 'fecha_creacion', 'usuario', 'inmobiliaria', 'obtener_servicios', 'obtener_precio']
     autocomplete_fields = ['servicios']
     list_filter = ['servicios', 'en_alquiler', 'en_venta']
     list_select_related = ['usuario', 'inmobiliaria']
@@ -42,3 +42,9 @@ class CasaAdmin(admin.ModelAdmin):
     def get_queryset(self, request):
         queryset = super().get_queryset(request)
         return queryset
+
+    def obtener_precio(self, casa):
+        return f"$ {casa.precio} ({casa.get_moneda_display()})"
+
+    obtener_precio.short_description = 'Precio'
+    obtener_precio.admin_order_field = 'precio'
