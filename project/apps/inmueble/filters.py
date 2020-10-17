@@ -6,4 +6,6 @@ from inmueble.models import Servicio
 class ServicioFilter(filters.FilterSet):
     class Meta:
         model = Servicio
-        fields = ('nombre', )
+        fields = ('buscar', )
+
+    buscar = filters.CharFilter(field_name='nombre', lookup_expr='icontains')
