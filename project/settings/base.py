@@ -55,6 +55,7 @@ DJANGO_APPS = [
 
 THIRD_APPS = [
     'rest_framework',
+    'django_filters',
 ]
 
 PROJECT_APPS = [
