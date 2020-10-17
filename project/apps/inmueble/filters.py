@@ -14,6 +14,7 @@ class ServicioFilter(filters.FilterSet):
 class CasaFilter(filters.FilterSet):
     class Meta:
         model = Casa
-        fields = ('buscar_nombre', 'en_alquiler', 'en_venta')
+        fields = ('nombre', 'en_alquiler', 'en_venta', 'precio')
 
-    buscar_nombre = filters.CharFilter(field_name='nombre', lookup_expr='icontains', label='Nombre')
+    nombre = filters.CharFilter(field_name='nombre', lookup_expr='icontains', label='Nombre')
+    precio = filters.RangeFilter()
