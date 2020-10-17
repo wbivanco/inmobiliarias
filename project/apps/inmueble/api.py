@@ -1,8 +1,10 @@
 from django.db.models import Prefetch
+from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import mixins
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.viewsets import ReadOnlyModelViewSet, GenericViewSet
 
+from inmueble.filters import InmuebleFilter
 from inmueble.models import Casa, Servicio
 from inmueble.serializers import CasaSerializer, ServicioSerializer
 
@@ -14,6 +16,9 @@ class ServicioViewSet(mixins.CreateModelMixin, mixins.RetrieveModelMixin, mixins
     queryset = Servicio.objects.activos().order_by('-nombre')
     serializer_class = ServicioSerializer
     permission_classes = (IsAuthenticated, )
+    filter_backends = (DjangoFilterBackend, )
+    filter_class = InmuebleFilter
+
 
     def perform_create(self, serializer):
         serializer.save(usuario=self.request.user)
