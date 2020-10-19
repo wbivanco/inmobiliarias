@@ -18,10 +18,7 @@ class ServicioViewSet(mixins.CreateModelMixin, mixins.RetrieveModelMixin, mixins
     permission_classes = (IsAuthenticated, )
     filter_backends = (DjangoFilterBackend, )
     filter_class = ServicioFilter
-<<<<<<< HEAD
 
-=======
->>>>>>> 58e412652a88c2d69806aa6c9bf71bf57c642431
 
     def perform_create(self, serializer):
         serializer.save(usuario=self.request.user)

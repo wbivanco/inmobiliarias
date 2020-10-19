@@ -18,3 +18,5 @@ class CasaFilter(filters.FilterSet):
 
     nombre = filters.CharFilter(field_name='nombre', lookup_expr='icontains', label='Nombre')
     precio = filters.RangeFilter()
+    en_venta = filters.BooleanFilter()
+    en_alquiler = filters.BooleanFilter()
